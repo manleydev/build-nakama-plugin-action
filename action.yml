@@ -1,0 +1,16 @@
+name: "Build Nakama Plugin"
+description: "Build a Go plugin for Nakama"
+author: "josephbmanley"
+inputs:
+  nakamaVersion:
+    description: "tbd"
+    default: "latest"
+  moduleDirectory:
+    description: "tbd"
+    required: true
+outputs:
+  binary:
+    description: "The outputted binary of the Nakama plugin"
+runs:
+  using: "node12"
+  main: "dist/index.js"

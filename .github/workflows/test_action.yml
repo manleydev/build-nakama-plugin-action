@@ -1,0 +1,16 @@
+name: Test Action
+
+on: [push, pull_request]
+
+jobs:
+  TestAction:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Run Action
+      id: build_plugin
+      uses: ./
+      with:
+        nakamaVersion: "2.11.1"
+        moduleDirectory: test_proj
