@@ -3,14 +3,14 @@ description: "Build a Go plugin for Nakama"
 author: "josephbmanley"
 inputs:
   nakamaVersion:
-    description: "tbd"
+    description: "The release version of Nakama to build for. Defaults to `latest`."
     default: "latest"
   moduleDirectory:
-    description: "tbd"
+    description: "The name of the preset found in `export_presets.cfg` you would like to build."
     required: true
 outputs:
   binary:
-    description: "The outputted binary of the Nakama plugin"
+    description: "The outputed binary of the Nakama plugin"
 runs:
   using: "node12"
   main: "dist/index.js"
