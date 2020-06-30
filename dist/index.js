@@ -12179,6 +12179,7 @@ function plural(ms, msAbs, n, name) {
 
 const core = __webpack_require__(470);
 const fs = __webpack_require__(747);
+const path = __webpack_require__(622)
 
 // Setup Docker
 const Docker = __webpack_require__(965);
@@ -12188,12 +12189,14 @@ try {
 
   // Get inputs
   var nakama_version = core.getInput('nakamaVersion');
-  var module_name = core.getInput('moduleDirectory');
+  var module_dir = core.getInput('moduleDirectory');
+  
+  var module_name = path.basename(module_dir)
 
   // Determine docker image for building
   var docker_image = 'heroiclabs/nakama-pluginbuilder:' + nakama_version;
 
-  process.chdir(module_name);
+  process.chdir(module_dir);
 
   // Pull docker image for building
   console.log("Pulling build image...");
@@ -12221,14 +12224,13 @@ try {
         // Check for binary
         if (fs.existsSync(module_name +'.so')) {
           console.log("Build success!");
-          core.setOutput("binary", module_name + "/" + module_name + "so");
+          core.setOutput("binary", module_dir + "/" + module_name + ".so");
         }
         else
         {
           console.log("Build failed!");
         }
       
-        process.chdir("..");
       })
     }
     function onProgress(event) {}
@@ -27162,7 +27164,7 @@ try {
 /***/ 724:
 /***/ (function(module) {
 
-module.exports = {"_from":"ssh2-streams@~0.4.10","_id":"ssh2-streams@0.4.10","_inBundle":false,"_integrity":"sha512-8pnlMjvnIZJvmTzUIIA5nT4jr2ZWNNVHwyXfMGdRJbug9TpI3kd99ffglgfSWqujVv/0gxwMsDn9j9RVst8yhQ==","_location":"/ssh2-streams","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"ssh2-streams@~0.4.10","name":"ssh2-streams","escapedName":"ssh2-streams","rawSpec":"~0.4.10","saveSpec":null,"fetchSpec":"~0.4.10"},"_requiredBy":["/ssh2"],"_resolved":"https://registry.npmjs.org/ssh2-streams/-/ssh2-streams-0.4.10.tgz","_shasum":"48ef7e8a0e39d8f2921c30521d56dacb31d23a34","_spec":"ssh2-streams@~0.4.10","_where":"/var/home/vetra/build-nakama-plugin-action/node_modules/ssh2","author":{"name":"Brian White","email":"mscdex@mscdex.net"},"bugs":{"url":"https://github.com/mscdex/ssh2-streams/issues"},"bundleDependencies":false,"dependencies":{"asn1":"~0.2.0","bcrypt-pbkdf":"^1.0.2","streamsearch":"~0.1.2"},"deprecated":false,"description":"SSH2 and SFTP(v3) client/server protocol streams for node.js","engines":{"node":">=5.2.0"},"homepage":"https://github.com/mscdex/ssh2-streams#readme","keywords":["ssh","ssh2","sftp","secure","protocol","streams","client","server"],"licenses":[{"type":"MIT","url":"http://github.com/mscdex/ssh2-streams/raw/master/LICENSE"}],"main":"./index","name":"ssh2-streams","repository":{"type":"git","url":"git+ssh://git@github.com/mscdex/ssh2-streams.git"},"scripts":{"test":"node test/test.js"},"version":"0.4.10"};
+module.exports = {"_args":[["ssh2-streams@0.4.10","/var/home/vetra/Projects/build-nakama-plugin-action"]],"_from":"ssh2-streams@0.4.10","_id":"ssh2-streams@0.4.10","_inBundle":false,"_integrity":"sha512-8pnlMjvnIZJvmTzUIIA5nT4jr2ZWNNVHwyXfMGdRJbug9TpI3kd99ffglgfSWqujVv/0gxwMsDn9j9RVst8yhQ==","_location":"/ssh2-streams","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"ssh2-streams@0.4.10","name":"ssh2-streams","escapedName":"ssh2-streams","rawSpec":"0.4.10","saveSpec":null,"fetchSpec":"0.4.10"},"_requiredBy":["/ssh2"],"_resolved":"https://registry.npmjs.org/ssh2-streams/-/ssh2-streams-0.4.10.tgz","_spec":"0.4.10","_where":"/var/home/vetra/Projects/build-nakama-plugin-action","author":{"name":"Brian White","email":"mscdex@mscdex.net"},"bugs":{"url":"https://github.com/mscdex/ssh2-streams/issues"},"dependencies":{"asn1":"~0.2.0","bcrypt-pbkdf":"^1.0.2","streamsearch":"~0.1.2"},"description":"SSH2 and SFTP(v3) client/server protocol streams for node.js","engines":{"node":">=5.2.0"},"homepage":"https://github.com/mscdex/ssh2-streams#readme","keywords":["ssh","ssh2","sftp","secure","protocol","streams","client","server"],"licenses":[{"type":"MIT","url":"http://github.com/mscdex/ssh2-streams/raw/master/LICENSE"}],"main":"./index","name":"ssh2-streams","repository":{"type":"git","url":"git+ssh://git@github.com/mscdex/ssh2-streams.git"},"scripts":{"test":"node test/test.js"},"version":"0.4.10"};
 
 /***/ }),
 

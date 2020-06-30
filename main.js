@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const fs = require('fs');
+const path = require('path')
 
 // Setup Docker
 const Docker = require('dockerode');
@@ -9,12 +10,14 @@ try {
 
   // Get inputs
   var nakama_version = core.getInput('nakamaVersion');
-  var module_name = core.getInput('moduleDirectory');
+  var module_dir = core.getInput('moduleDirectory');
+  
+  var module_name = path.basename(module_dir)
 
   // Determine docker image for building
   var docker_image = 'heroiclabs/nakama-pluginbuilder:' + nakama_version;
 
-  process.chdir(module_name);
+  process.chdir(module_dir);
 
   // Pull docker image for building
   console.log("Pulling build image...");
@@ -42,14 +45,13 @@ try {
         // Check for binary
         if (fs.existsSync(module_name +'.so')) {
           console.log("Build success!");
-          core.setOutput("binary", module_name + "/" + module_name + "so");
+          core.setOutput("binary", module_dir + "/" + module_name + ".so");
         }
         else
         {
           console.log("Build failed!");
         }
       
-        process.chdir("..");
       })
     }
     function onProgress(event) {}
