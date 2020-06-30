@@ -14,3 +14,12 @@ jobs:
       with:
         nakamaVersion: "2.11.1"
         moduleDirectory: test_proj
+    - name: Test Output
+      env:
+        binary_loc: ${{ steps.set-build_plugin.outputs.binary }}
+      run: |
+        echo "Output: $binary_loc"
+        if [ ! -f "$binary_loc" ]; then
+            echo "Binary does not exist!"
+            exit 1
+        fi
