@@ -16,7 +16,7 @@ jobs:
         moduleDirectory: test_proj
     - name: Test Output
       env:
-        binary_loc: ${{ steps.set-build_plugin.outputs.binary }}
+        binary_loc: ${{ steps.build_plugin.outputs.binary }}
       run: |
         echo "Output: $binary_loc"
         if [ ! -f "$binary_loc" ]; then

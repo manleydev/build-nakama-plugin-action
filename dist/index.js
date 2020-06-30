@@ -12224,7 +12224,9 @@ try {
         // Check for binary
         if (fs.existsSync(module_name +'.so')) {
           console.log("Build success!");
-          core.setOutput("binary", module_dir + "/" + module_name + ".so");
+          var output_file = module_dir + "/" + module_name + ".so";
+          console.log("Built to: " + output_file)
+          core.setOutput("binary", output_file);
         }
         else
         {
