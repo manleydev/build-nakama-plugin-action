@@ -30,7 +30,7 @@ try {
     function onFinished(err, output)
     {
       console.log("Starting build...")
-      docker.run(docker_image, ['build', '-buildmode=plugin', '-trimpath', '-o', module_name + '.so'], process.stdout, 
+      docker.run(docker_image, ['build', '-buildmode=plugin', '-trimpath', '-o', module_name + '.so', module_name + '.go'], process.stdout, 
       
       // Mount working directory to `/builder`
       { HostConfig: { Binds: [ process.cwd() + ":/builder" ] }},
